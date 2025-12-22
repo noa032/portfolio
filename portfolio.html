@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>研究作品集 - 淡江二手書平台</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+  /* 專案橫幅 */
+  .project-header {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), #1b1b1b;
+    padding: 60px 40px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-size: 26px;
+    border-left: 4px solid #fff;
+    padding-left: 15px;
+    margin: 60px 0 30px;
+    color: #f5f5f5;
+  }
+
+  .deliverable-card {
+    background: #1b1b1b;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 1px solid #333;
+  }
+
+  /* 縮小預覽圖片網格 */
+  .grid-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 150px));
+    gap: 15px;
+    margin: 20px 0;
+  }
+
+  /* 讓圖片具有點擊指引 */
+  .grid-preview img, .img-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid #444;
+    cursor: zoom-in; /* 滑鼠移入顯示放大圖示 */
+    transition: 0.3s;
+  }
+
+  .grid-preview img { opacity: 0.7; }
+  .grid-preview img:hover { opacity: 1; transform: translateY(-3px); }
+
+  /* 核心產出圖片 (Storyboard & Wireframe) */
+  .img-container img {
+    max-width: 450px;
+    display: block;
+    margin: 20px auto;
+  }
+
+  .action-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid #fff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: 0.3s;
+    font-size: 13px;
+  }
+
+  .action-btn:hover { background: #fff; color: #111; }
+
+  /* === Lightbox 燈箱樣式 === */
+  #lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+
+  #lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    animation: zoomIn 0.3s;
+  }
+
+  @keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1><a href="index.html" style="color: inherit; text-decoration: none;">作品集</a></h1>
+  <nav>
+    <a href="index.html">首頁</a>
+    <span>✦</span>
+    <a href="about.html">履歷</a>
+    <span>✦</span>
+    <a href="portfolio.html" class="active">作品集</a>
+  </nav>
+</header>
+
+<main>
+  <section class="project-header">
+    <h2 style="border: none; margin: 10px 0;">TamBook: 淡江二手課本交易平台</h2>
+    <p style="color: #bbb;">點擊下方圖片可查看高解析度大圖。</p>
+  </section>
+
+  <h3 class="section-title">01. 競品分析</h3>
+  <div class="deliverable-card">
+    <div class="grid-preview">
+      <img src="img/1.jpg" alt="Carousell分析">
+      <img src="img/2.jpg" alt="FB社團分析">
+      <img src="img/3.jpg" alt="茉莉書店分析">
+      <img src="img/4.jpg" alt="蝦皮購物分析">
+      <img src="img/5.jpg" alt="書寶分析">
+    </div>
+  
+  </div>
+
+  <h3 class="section-title">02. 使用者分析</h3>
+  <div class="deliverable-card">
+    <div class="grid-preview">
+      <img src="img/person1.jpg" alt="Persona 1">
+      <img src="img/person2.jpg" alt="Persona 2">
+      <img src="img/person3.jpg" alt="Persona 3">
+      <img src="img/person4.jpg" alt="Persona 4">
+    </div>
+  </div>
+
+  <h3 class="section-title">03. 故事表 (Storyboard)</h3>
+  <div class="deliverable-card">
+    <div class="img-container">
+      <img src="img/story.jpg" alt="Storyboard">
+    </div>
+  </div>
+
+  <h3 class="section-title">04. 介面框架 (Wireframe)</h3>
+  <div class="deliverable-card">
+    <div class="img-container">
+      <img src="img/frame.jpg" alt="Wireframe">
+    </div>
+  </div>
+</main>
+
+<div id="lightbox">
+  <img src="" alt="放大圖片">
+</div>
+
+<footer>
+  <p>© 2024 TamBook 研究小組</p>
+</footer>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = lightbox.querySelector("img");
+
+  // 選取所有 deliverable-card 內的圖片
+  document.querySelectorAll(".deliverable-card img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden"; // 防止背景捲動
+    });
+  });
+
+  // 點擊背景關閉
+  lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
+    document.body.style.overflow = "auto";
+  });
+</script>
+
+</body>
+</html>
