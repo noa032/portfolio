@@ -9,22 +9,27 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-  /* 針對履歷頁面的特殊佈局 */
+  /* 基礎版面配置 */
   .member-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
+    grid-template-columns: 1fr; /* 採用單欄橫式佈局以展示長型簡歷 */
+    gap: 40px;
     margin-top: 40px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .member-card {
     background-color: #1b1b1b;
     border: 1px solid #333;
     border-radius: 12px;
-    padding: 30px;
+    padding: 0; 
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    display: flex; 
+    align-items: stretch;
   }
 
   .member-card:hover {
@@ -34,7 +39,28 @@
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
   }
 
-  /* 裝飾性元素：右上角的小標記 */
+  /* 簡歷圖預覽區 */
+  .resume-image-box {
+    flex: 0 0 250px; 
+    background: #000;
+    overflow: hidden;
+    border-right: 1px solid #333;
+  }
+
+  .resume-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: top; /* 預覽圖鎖定簡歷頂部 */
+    transition: transform 0.5s ease;
+  }
+
+  /* 文字資訊區 */
+  .card-body {
+    padding: 30px;
+    flex: 1;
+  }
+
   .member-card::after {
     content: "✦";
     position: absolute;
@@ -46,15 +72,15 @@
 
   .member-card h3 {
     margin: 0 0 15px 0;
-    font-size: 24px;
+    font-size: 28px;
     color: #f5f5f5;
     border-bottom: 1px solid #444;
     padding-bottom: 10px;
-    display: inline-block;
+    display: block;
   }
 
   .member-info {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     display: flex;
     align-items: flex-start;
   }
@@ -62,22 +88,25 @@
   .label {
     color: #888;
     font-weight: 600;
-    min-width: 80px;
+    min-width: 90px;
     display: inline-block;
   }
 
   .content {
     color: #ccc;
     flex: 1;
+    line-height: 1.6;
   }
 
-  /* 行動裝置優化 */
-  @media (max-width: 600px) {
-    .member-grid {
-      grid-template-columns: 1fr;
+  /* RWD 手機版優化 */
+  @media (max-width: 768px) {
+    .member-card {
+      flex-direction: column;
     }
-    header {
-      padding: 20px;
+    .resume-image-box {
+      flex: 0 0 300px;
+      border-right: none;
+      border-bottom: 1px solid #333;
     }
   }
 </style>
@@ -104,66 +133,86 @@
 
   <div class="member-grid">
     <div class="member-card">
-      <h3>蕭欣誼</h3>
-      <div class="member-info">
-        <span class="label">系級</span>
-        <span class="content">資圖系 三年級</span>
+      <div class="resume-image-box">
+        <img src="img/person4.jpg" alt="蕭欣誼簡歷" class="resume-thumb">
       </div>
-      <div class="member-info">
-        <span class="label">擅長領域</span>
-        <span class="content">版面編排、創意發想</span>
-      </div>
-      <div class="member-info">
-        <span class="label">個人特質</span>
-        <span class="content">注重細節、樂於協作</span>
-      </div>
-    </div>
-
-    <div class="member-card">
-      <h3>梁毓婷</h3>
-      <div class="member-info">
-        <span class="label">系級</span>
-        <span class="content">資圖系 三年級</span>
-      </div>
-      <div class="member-info">
-        <span class="label">擅長領域</span>
-        <span class="content">資料分析、內容統整</span>
-      </div>
-      <div class="member-info">
-        <span class="label">個人特質</span>
-        <span class="content">做事負責、善於規劃與團隊協作</span>
+      <div class="card-body">
+        <h3>蕭欣誼</h3>
+        <div class="member-info">
+          <span class="label">系級</span>
+          <span class="content">資圖系 三年級</span>
+        </div>
+        <div class="member-info">
+          <span class="label">擅長領域</span>
+          <span class="content">版面編排、創意發想</span>
+        </div>
+        <div class="member-info">
+          <span class="label">個人特質</span>
+          <span class="content">注重細節、樂於協作</span>
+        </div>
       </div>
     </div>
 
     <div class="member-card">
-      <h3>陸莛楀</h3>
-      <div class="member-info">
-        <span class="label">系級</span>
-        <span class="content">資圖系 四年級</span>
+      <div class="resume-image-box">
+        <img src="img/profile.jpg" alt="梁毓婷簡歷" class="resume-thumb">
       </div>
-      <div class="member-info">
-        <span class="label">擅長領域</span>
-        <span class="content">資料比對與內容校對</span>
-      </div>
-      <div class="member-info">
-        <span class="label">個人特質</span>
-        <span class="content">細心謹慎、做事有條理</span>
+      <div class="card-body">
+        <h3>梁毓婷</h3>
+        <div class="member-info">
+          <span class="label">系級</span>
+          <span class="content">資圖系 三年級</span>
+        </div>
+        <div class="member-info">
+          <span class="label">擅長領域</span>
+          <span class="content">資料分析、內容統整</span>
+        </div>
+        <div class="member-info">
+          <span class="label">個人特質</span>
+          <span class="content">做事負責、善於規劃與團隊協作</span>
+        </div>
       </div>
     </div>
 
     <div class="member-card">
-      <h3>楊廷紆</h3>
-      <div class="member-info">
-        <span class="label">系級</span>
-        <span class="content">資圖系 三年級</span>
+      <div class="resume-image-box">
+        <img src="img/profile2.jpg" alt="陸莛楀簡歷" class="resume-thumb">
       </div>
-      <div class="member-info">
-        <span class="label">擅長領域</span>
-        <span class="content">資料管理與軟體操作</span>
+      <div class="card-body">
+        <h3>陸莛楀</h3>
+        <div class="member-info">
+          <span class="label">系級</span>
+          <span class="content">資圖系 四年級</span>
+        </div>
+        <div class="member-info">
+          <span class="label">擅長領域</span>
+          <span class="content">資料比對與內容校對</span>
+        </div>
+        <div class="member-info">
+          <span class="label">個人特質</span>
+          <span class="content">細心謹慎、做事有條理</span>
+        </div>
       </div>
-      <div class="member-info">
-        <span class="label">個人特質</span>
-        <span class="content">注重條理、重視效率</span>
+    </div>
+
+    <div class="member-card">
+      <div class="resume-image-box">
+        <img src="img/profile3.jpg" alt="楊廷紆簡歷" class="resume-thumb">
+      </div>
+      <div class="card-body">
+        <h3>楊廷紆</h3>
+        <div class="member-info">
+          <span class="label">系級</span>
+          <span class="content">資圖系 三年級</span>
+        </div>
+        <div class="member-info">
+          <span class="label">擅長領域</span>
+          <span class="content">資料管理與軟體操作</span>
+        </div>
+        <div class="member-info">
+          <span class="label">個人特質</span>
+          <span class="content">注重條理、重視效率</span>
+        </div>
       </div>
     </div>
   </div>
